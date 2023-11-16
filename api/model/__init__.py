@@ -5,6 +5,8 @@ import os
 
 # importando os elementos definidos no modelo
 from model.base import Base
+from model.model import Model
+from model.client import Client
 
 db_path = "database/"
 # Verifica se o diretorio não existe
