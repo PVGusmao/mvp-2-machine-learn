@@ -15,7 +15,7 @@ app = OpenAPI(__name__, info=info)
 CORS(app)
 
 home_tag = Tag(name="Documentação", description="Seleção de documentação: Swagger, Redoc ou RapiDoc")
-# paciente_tag = Tag(name="Paciente", description="Adição, visualização, remoção e predição de pacientes com Diabetes")
+paciente_tag = Tag(name="Paciente", description="Adição, visualização, remoção e predição de pacientes com Diabetes")
 
 @app.get('/', tags=[home_tag])
 def home():
