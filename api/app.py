@@ -1,14 +1,12 @@
 from flask_openapi3 import OpenAPI, Info, Tag
-from flask import redirect
+from flask import redirect, jsonify
 from urllib.parse import unquote
 
 from sqlalchemy.exc import IntegrityError
 from model import Client, Model
-from schema import ClientDTO
+from schema import ClientDTO, show_clients
 
 from model import Session
-# from logger import logger
-# from schemas import *
 from flask_cors import CORS
 
 # Instanciando o objeto OpenAPI
@@ -25,6 +23,11 @@ def home():
     """
     return redirect('/openapi')
 
+@app.get('/client', tags=[clients_tag])
+def list_client():
+    session = Session()
+    clients = session.query(Client).all()
+    return show_clients(clients), 200
 
 @app.post('/client', tags=[clients_tag])
 def client(form: ClientDTO):
@@ -50,6 +53,18 @@ def client(form: ClientDTO):
         outcome=Model.predict(model, form), 
     )
 
-    print(client)
+    try:
+        session = Session()
 
-    return 'ie'
+        if (session.query(Client).filter(Client.name == client.name).first()):
+            message = "Cliente já cadastrado."
+            return {"message": error}, 409
+        
+        session.add(client)
+        session.commit()
+
+        return {"message": "Cliente adicionado com sucesso!"}, 201
+
+    except Exception as error:
+        message = "Algo errado aconteceu, tente novamente em segundos."
+        return {"message": message}, 500

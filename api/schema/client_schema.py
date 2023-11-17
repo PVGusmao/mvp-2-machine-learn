@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional, List
-# from model.paciente import Paciente
+from model.client import Client
 import json
 import numpy as np
 
@@ -65,24 +65,24 @@ class ClientDTO(BaseModel):
 #     """
 #     name: str = "Maria"
     
-# # Apresenta apenas os dados de um paciente    
-# def apresenta_paciente(paciente: Paciente):
-#     """ Retorna uma representação do paciente seguindo o schema definido em
-#         PacienteViewSchema.
-#     """
-#     return {
-#         "id": paciente.id,
-#         "name": paciente.name,
-#         "preg": paciente.preg,
-#         "plas": paciente.plas,
-#         "pres": paciente.pres,
-#         "skin": paciente.skin,
-#         "test": paciente.test,
-#         "mass": paciente.mass,
-#         "pedi": paciente.pedi,
-#         "age": paciente.age,
-#         "outcome": paciente.outcome
-#     }
+def show_clients(client: Client):
+    return {
+        # "name": client.name,
+        # "age": client.age,
+        # "sex": client.sex,
+        # "cp": client.cp,
+        # "trestbps": client.trestbps,
+        # "chol": client.chol,
+        # "fbs": client.fbs,
+        # "restecg": client.restecg,
+        # "thalach": client.thalach,
+        # "exang": client.exang,
+        # "oldpeak": client.oldpeak,
+        # "slope": client.slope,
+        # "ca": client.ca,
+        # "thal": client.thal,
+        # "outcome": client.outcome
+    }
     
 # # Apresenta uma lista de pacientes
 # def apresenta_pacientes(pacientes: List[Paciente]):
