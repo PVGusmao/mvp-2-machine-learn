@@ -1,1 +1,1 @@
-from schema.client_schema import ClientDTO, show_clients
+from schema.client_schema import ClientDTO, show_all_clients, show_one_client

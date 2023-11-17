@@ -1,16 +1,16 @@
 from flask_openapi3 import OpenAPI, Info, Tag
-from flask import redirect, jsonify
+from flask import redirect, request
 from urllib.parse import unquote
 
 from sqlalchemy.exc import IntegrityError
 from model import Client, Model
-from schema import ClientDTO, show_clients
+from schema import ClientDTO, show_all_clients, show_one_client
 
 from model import Session
 from flask_cors import CORS
 
 # Instanciando o objeto OpenAPI
-info = Info(title="Minha API", version="1.0.0")
+info = Info(title="MVP-2-Machine-Learn", version="1.0.0")
 app = OpenAPI(__name__, info=info)
 CORS(app)
 
@@ -23,11 +23,19 @@ def home():
     """
     return redirect('/openapi')
 
-@app.get('/client', tags=[clients_tag])
+@app.get('/clients', tags=[clients_tag])
 def list_client():
     session = Session()
     clients = session.query(Client).all()
-    return show_clients(clients), 200
+    print(clients)
+    return show_all_clients(clients), 200
+
+@app.get('/client', tags=[clients_tag])
+def get_client():
+    name = request.args.get('name')
+    session = Session()
+    client = session.query(Client).filter(Client.name == name).first()
+    return show_one_client(client)
 
 @app.post('/client', tags=[clients_tag])
 def client(form: ClientDTO):

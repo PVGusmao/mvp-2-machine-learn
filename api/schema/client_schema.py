@@ -65,25 +65,48 @@ class ClientDTO(BaseModel):
 #     """
 #     name: str = "Maria"
     
-def show_clients(client: Client):
+def show_all_clients(client: Client):
+    result = []
+    for client in client:
+        result.append({
+            "name": client.name,
+            "age": client.age,
+            "sex": client.sex,
+            "cp": client.cp,
+            "trestbps": client.trestbps,
+            "chol": client.chol,
+            "fbs": client.fbs,
+            "restecg": client.restecg,
+            "thalach": client.thalach,
+            "exang": client.exang,
+            "oldpeak": client.oldpeak,
+            "slope": client.slope,
+            "ca": client.ca,
+            "thal": client.thal,
+            "outcome": client.outcome
+        })
+
+    return result
+
+def show_one_client(client: Client):
     return {
-        # "name": client.name,
-        # "age": client.age,
-        # "sex": client.sex,
-        # "cp": client.cp,
-        # "trestbps": client.trestbps,
-        # "chol": client.chol,
-        # "fbs": client.fbs,
-        # "restecg": client.restecg,
-        # "thalach": client.thalach,
-        # "exang": client.exang,
-        # "oldpeak": client.oldpeak,
-        # "slope": client.slope,
-        # "ca": client.ca,
-        # "thal": client.thal,
-        # "outcome": client.outcome
+        "name": client.name,
+        "age": client.age,
+        "sex": client.sex,
+        "cp": client.cp,
+        "trestbps": client.trestbps,
+        "chol": client.chol,
+        "fbs": client.fbs,
+        "restecg": client.restecg,
+        "thalach": client.thalach,
+        "exang": client.exang,
+        "oldpeak": client.oldpeak,
+        "slope": client.slope,
+        "ca": client.ca,
+        "thal": client.thal,
+        "outcome": client.outcome
     }
-    
+
 # # Apresenta uma lista de pacientes
 # def apresenta_pacientes(pacientes: List[Paciente]):
 #     """ Retorna uma representação do paciente seguindo o schema definido em
