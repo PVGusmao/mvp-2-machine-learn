@@ -33,6 +33,7 @@ def list_client():
 @app.get('/client', tags=[clients_tag])
 def get_client():
     name = request.args.get('name')
+
     session = Session()
     client = session.query(Client).filter(Client.name == name).first()
     return show_one_client(client)

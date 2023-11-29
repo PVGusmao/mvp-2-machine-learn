@@ -26,6 +26,8 @@ class Model:
                             form.ca,
                             form.thal,
                           ])
+        print('X_input', X_input.reshape(1, -1))
         # Faremos o reshape para que o modelo entenda que estamos passando
-        diagnosis = model.predict(X_input.reshape(1, -1))
+        diagnosis = model.predict(X_input.reshape(1, -2))
+        print(diagnosis)
         return int(diagnosis[0])
