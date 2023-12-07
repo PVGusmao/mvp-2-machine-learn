@@ -140,3 +140,11 @@
 .back-button:active {
   box-shadow: none;
 }
+
+.input-error {
+  color: red;
+  font-weight: bold;
+  font-size: 12px;
+  margin-left: 12px;
+  margin-top: 20px;
+}

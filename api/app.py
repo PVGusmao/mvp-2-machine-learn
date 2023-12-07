@@ -44,6 +44,12 @@ def client(form: ClientDTO):
     modelPath = './model_dataset/model.pkl'
     model = Model.load_model(modelPath)
 
+    print('oiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', form.name == "")
+
+    if (form.name == ""):
+        message = "Digite um nome."
+        return {"message": message}, 400
+
     client = Client(
         name=form.name.strip(),
         age=form.age,

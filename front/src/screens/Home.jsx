@@ -15,7 +15,22 @@ import image from '../assets/backArrow.png';
 // |______|______|_____|__________|__________|________|_________|_________|_________|_________|_________|_______|_____|_______| 
 
 export function Home() {
-  const [body, setBody] = useState({});
+  const [body, setBody] = useState({
+    name: "",
+    age: "",
+    sex: "",
+    cp: "",
+    trestbps: "",
+    chol: "",
+    fbs: "",
+    restecg: "",
+    thalach: "",
+    exang: "",
+    oldpeak: "",
+    slope: "",
+    ca: "",
+    thal: "",
+  });
   const [data, setData] = useState({});
   const navigate = useNavigate();
 
@@ -45,8 +60,13 @@ export function Home() {
     formData.append('thal', body.thal);
 
     axios.post('http://localhost:5000/client', formData)
-      .then((res) => setData(res.data))
-      .catch((err) => console.log(err)); 
+      .then((res) => {
+        setData(res.data)
+        window.alert(res.data.message)
+      })
+      .catch((err) => {
+        window.alert(err?.response?.data?.message)
+      }); 
   }
   function result() {
     navigate('/list')
@@ -76,8 +96,14 @@ export function Home() {
           <input onChange={handleChange} type='number' className='input' placeholder="Resultado do Teste de Estresse com Tálio" name="thal" />
         </div>
 
-        <button onClick={predict} className='predict-button'>Predict</button>
+        <p>Exemplo de inputs</p>
+        <p>|__Age__|_Sex_|____CP__|_Trestbps_|__Chol__|___FBS__|_Restecg_|_Thalach_|__Exang_|_Oldpeak_|_Slope_|__CA_|__Thal</p>
+        <p>|_63.0___|_1.0_|__1.0____|___145.0__|_233.0__|___1.0___|___2.0___|__150.0__|___0.0___|___2.3___|__3.0__|___0.0_|___6.0_|</p>
+        <p>|_67.0___|_1.0_|___4.0___|___160.0__|_286.0__|___0.0___|___2.0___|__108.0__|___1.0___|___1.5___|__2.0__|_3.0___|___3.0_|</p>
+        
+        <button onClick={predict} className='predict-button'>Prever</button>
 
+        <p>{}</p>
         <div>
           <p className='meaning'>O significado de cada input acima:</p>
 
